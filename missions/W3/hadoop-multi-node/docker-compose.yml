@@ -1,0 +1,61 @@
+version: '3.9'
+services:
+  master:
+    container_name: master
+    hostname: master
+    image: jnamu/hadoop-master:latest
+    ports:
+#      - "8042:8042" # nodemanager.webapp
+      - "8088:8088" # resourcemanager.webapp
+      - "9870:9870" # dfs.namenode
+#      - "9864:9864" # dfs.datanode
+      - "9000:9000"
+    volumes:
+      - master-hdfs-store:/usr/local/hadoop/data
+  slave1:
+    container_name: slave1
+    hostname: slave1
+    image: jnamu/hadoop-slave:latest
+    ports:
+      - "9864:9864"
+      - "8042:8042"
+#        - "8042:8042" # nodemanager.webapp
+#        #      - "19888:19888" # mapreduce.jobhistory.webapp
+#        #      - "8480:8480" # dfs.journalnode
+#        - "9864:9864" # dfs.datanode
+#      #      - "9000:9000"
+#      #      - "50010:50010"
+#    expose:
+#      - 9864
+#      - 8042
+    volumes:
+      - slave1-hdfs-store:/usr/local/hadoop/data
+  slave2:
+    container_name: slave2
+    hostname: slave2
+    image: jnamu/hadoop-slave:latest
+    ports:
+      - "9865:9864"
+      - "8043:8042"
+#        - "8042:8042" # nodemanager.webapp
+#        #      - "19888:19888" # mapreduce.jobhistory.webapp
+#        #      - "8480:8480" # dfs.journalnode
+#        - "9864:9864" # dfs.datanode
+#      #      - "9000:9000"
+#      #      - "50010:50010"
+#    expose:
+#      - 9864
+#      - 8042
+    volumes:
+      - slave2-hdfs-store:/usr/local/hadoop/data
+volumes:
+  master-hdfs-store:
+    external: true
+  slave1-hdfs-store:
+    external: true
+  slave2-hdfs-store:
+    external: true
+
+
+
+
