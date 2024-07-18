@@ -8,3 +8,5 @@
         <value>$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*</value>
     </property>
 </configuration>
+
+
