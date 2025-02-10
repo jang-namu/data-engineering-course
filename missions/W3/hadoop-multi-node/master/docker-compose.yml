@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  hadoop:
+    container_name: hadoop
+    image: jnamu/single-node-hadoop:latest
+    ports:
+      - "8042:8042" # nodemanager.webapp
+      - "8088:8088" # resourcemanager.webapp
+#      - "19888:19888" # mapreduce.jobhistory.webapp
+      - "9870:9870" # dfs.namenode
+#      - "9868:9868" # namenode.secondary
+#      - "8480:8480" # dfs.journalnode
+      - "9864:9864" # dfs.datanode
+#      - "9000:9000"
+#      - "50010:50010"
+    volumes:
+      - hdfs-store:/tmp/hadoop-hdfs/dfs
+volumes:
+  hdfs-store:
+    external: true
+
+
